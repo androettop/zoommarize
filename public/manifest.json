@@ -9,7 +9,13 @@
     },
     "content_scripts": [
         {
-            "matches": ["https://*.zoom.us/*"],
+            "world": "MAIN",
+            "matches": ["https://*.zoom.us/wc/*"],
+            "js": ["capture-state.js"],
+            "run_at": "document_start"
+        },
+        {
+            "matches": ["https://*.zoom.us/wc/*"],
             "js": ["start.js"],
             "run_at": "document_start"
         }

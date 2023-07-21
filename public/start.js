@@ -1,48 +1,20 @@
 /* eslint-disable no-undef */
 
-const getZoomState = () => {
-    try {
-        const appElem = document.querySelector(".meeting-app");
-        if (!appElem) {
-            throw new Error("No app element found");
-        }
-        const reactInternalInstance = Object.keys(appElem).find((key) =>
-            key.startsWith("__reactInternalInstance"),
-        );
-
-        if (!reactInternalInstance) {
-            throw new Error("No react internal instance found");
-        }
-
-        const fullState =
-            appElem[
-                reactInternalInstance
-            ]?.return.return.memoizedProps.value.store.getState();
-
-        const state = {
-            meeting: {
-                meetingTopic: fullState?.meeting?.meetingTopic,
-                meetingId: fullState?.meeting.meetingId,
-            },
-            newLiveTranscription: {
-                newLTSubscribed:
-                    fullState?.newLiveTranscription?.newLTSubscribed,
-                newLTMessage: fullState?.newLiveTranscription.newLTMessage,
-            },
-        };
-        return state;
-    } catch (e) {
-        return null;
-    }
+const getState = () => {
+    const stateElem = document.getElementById("zoom-state");
+    const stateb64 = stateElem.innerText;
+    return JSON.parse(atob(stateb64));
 };
 
 // Make a simple request:
 setInterval(async () => {
-    const meetings = await chrome.storage.local.get("meetings");
-    const state = getZoomState();
+    const state = getState();
+
     const currentMeeting = state?.meeting?.meetingId;
 
     if (!currentMeeting) return;
+
+    const meetings = await chrome.storage.local.get("meetings")?.meetings || {};
 
     meetings[currentMeeting] = meetings[currentMeeting] || {
         meetingTopic: state?.meeting?.meetingTopic,
@@ -53,6 +25,5 @@ setInterval(async () => {
         ...meetings[currentMeeting].messages,
         ...state?.newLiveTranscription?.newLTMessage,
     };
-
-    chrome.storage.local.set({ meetings: meetings });
-}, 5000);
+    chrome.storage.local.set({ meetings });
+}, 1000);
