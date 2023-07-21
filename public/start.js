@@ -6,18 +6,22 @@ const getState = () => {
     return JSON.parse(atob(stateb64));
 };
 
+const currentMeetingId = crypto.randomUUID();
+
 // Make a simple request:
 setInterval(async () => {
     const state = getState();
 
-    const currentMeeting = state?.meeting?.meetingId;
+    const currentMeeting = currentMeetingId;
 
     if (!currentMeeting) return;
 
-    const meetings = await chrome.storage.local.get("meetings")?.meetings || {};
+    const meetings =
+        (await chrome.storage.local.get("meetings")?.meetings) || {};
 
     meetings[currentMeeting] = meetings[currentMeeting] || {
         meetingTopic: state?.meeting?.meetingTopic,
+        createdAt: new Date().toISOString(),
         messages: {},
     };
 
