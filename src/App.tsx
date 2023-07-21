@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { globalCss } from "./theme";
+import { summarize } from "./helpers/summarize";
+import { getMessagesFromMeeting } from "./helpers/zoom";
+import { ZoomMeeting } from "./types/meeting";
 
 const globalStyles = globalCss({
     body: { margin: 0, fontFamily: "$default" },
@@ -16,20 +19,47 @@ function App() {
         _setApiKey(apiKey);
     };
 
+    const [summarizedText, setSummarizedText] = useState("");
+    const [meetings, setMeetings] = useState<ZoomMeeting | null>(null);
+
+    useEffect(() => {
+        chrome.storage.local.get("meetings", (e: any) => {
+            setMeetings(e.meetings);
+        });
+    }, []);
+
     globalStyles();
     return (
         <div>
-            <label>
-                openai api key <br />
-                <input
-                    type="text"
-                    value={apiKey}
-                    onChange={(e) => setApiKey(e.target.value)}
-                />
-                <button onClick={() => {
-                    chrome.storage.local.get("state").then((e:any) => console.log(e))
-                }}> asd</button>
-            </label>
+            <div>
+                <label>
+                    openai api key <br />
+                    <input
+                        type="text"
+                        value={apiKey}
+                        onChange={(e) => setApiKey(e.target.value)}
+                    />
+                </label>
+            </div>
+            <div>
+                {meetings &&
+                    Object.values(meetings).map((meeting: ZoomMeeting) => (
+                        <button
+                            onClick={async () => {
+                                const summary = await summarize(
+                                    getMessagesFromMeeting(meeting),
+                                );
+                                setSummarizedText(summary);
+                            }}
+                        >
+                            {meeting.meetingTopic}
+                        </button>
+                    ))}
+            </div>
+            <div>
+                <h1>Resumen</h1>
+                <textarea value={summarizedText} />
+            </div>
         </div>
     );
 }

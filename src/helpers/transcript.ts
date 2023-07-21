@@ -1,3 +1,4 @@
+import { ZoomMessage } from "../types/meeting";
 import { Message, MessageTime } from "../types/message";
 
 const WORD_LIMIT = 1300;
@@ -64,22 +65,3 @@ export const createChunks = (
     }
     return chunks;
 };
-
-/**
- * This function transforms a message object from the database into a Message
- */
-export const transformMessage = (message: any): Message => {
-    const [hours, minutes, seconds] = message.messageTime.split(":");
-    return {
-        time: {
-            hours: parseInt(hours),
-            minutes: parseInt(minutes),
-            seconds: parseInt(seconds),
-        },
-        text: message.text,
-        user: {
-            name: message.user.displayName,
-            id: message.user.userId,
-        },
-    };
-}
