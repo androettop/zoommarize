@@ -6,5 +6,15 @@
     "action": {
         "default_popup": "index.html",
         "default_icon": "logo.png"
-    }
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://*.zoom.us/*"],
+            "js": ["start.js"],
+            "run_at": "document_start"
+        }
+    ],
+    "permissions": [
+        "storage"
+    ]
 }
