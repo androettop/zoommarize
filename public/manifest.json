@@ -1,10 +1,10 @@
 {
-  "manifest_version": 3,
-  "name": "Zoommarizer",
-  "description": "Summarize your Zoom meetings",
-  "version": "0.1",
-  "action": {
-    "default_popup": "index.html",
-    "default_icon": "logo.png"
-  }
+    "manifest_version": 3,
+    "name": "Zoommarizer",
+    "description": "Summarize your Zoom meetings",
+    "version": "0.1",
+    "action": {
+        "default_popup": "index.html",
+        "default_icon": "logo.png"
+    }
 }

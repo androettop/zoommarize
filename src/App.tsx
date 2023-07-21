@@ -1,13 +1,13 @@
 import React from "react";
-import { globalCss } from "./utils/theme";
+import { globalCss } from "./theme";
 
 const globalStyles = globalCss({
-  body: { margin: 0, fontFamily: "$default" },
+    body: { margin: 0, fontFamily: "$default" },
 });
 
 function App() {
-  globalStyles();
-  return <div>test</div>;
+    globalStyles();
+    return <div>test</div>;
 }
 
 export default App;
