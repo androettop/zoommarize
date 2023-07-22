@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "../../components/Logo/Logo";
 import { ViewContainer } from "./ApiKey.styles";
 import Paragraph from "../../components/Paragraph/Paragraph";
+import Input from "../../components/Input/Input";
 
 const ApiKey = () => {
     return (
@@ -14,6 +15,7 @@ const ApiKey = () => {
                     OpenAI api key
                 </a>
             </Paragraph>
+            <Input value={""} onChange={console.log} placeholder="Api key" />
         </ViewContainer>
     );
 };
