@@ -3,6 +3,7 @@ import Logo from "../../components/Logo/Logo";
 import { ViewContainer } from "./ApiKey.styles";
 import Paragraph from "../../components/Paragraph/Paragraph";
 import Input from "../../components/Input/Input";
+import Button from "../../components/Button/Button";
 
 const ApiKey = () => {
     return (
@@ -16,6 +17,7 @@ const ApiKey = () => {
                 </a>
             </Paragraph>
             <Input value={""} onChange={console.log} placeholder="Api key" />
+            <Button>Get started</Button>
         </ViewContainer>
     );
 };
