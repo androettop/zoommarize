@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../../components/Logo/Logo";
-import { ViewContainer } from "./ApiKey.styles";
+import { ButtonContainer, ViewContainer } from "./ApiKey.styles";
 import Paragraph from "../../components/Paragraph/Paragraph";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
+import { useStorage } from "../../helpers/storage";
 
 const ApiKey = () => {
+    const { state, setState } = useStorage();
+    const [apiKey, setApiKey] = useState(state.apiKey || "");
+
+    const getStarted = () => {
+        setState({ ...state, apiKey });
+    };
+
     return (
         <ViewContainer>
             <Logo size="large" />
@@ -16,8 +24,16 @@ const ApiKey = () => {
                     OpenAI api key
                 </a>
             </Paragraph>
-            <Input value={""} onChange={console.log} placeholder="Api key" />
-            <Button>Get started</Button>
+            <Input
+                value={apiKey}
+                onChange={(text) => setApiKey(text)}
+                placeholder="Api key"
+            />
+            <ButtonContainer>
+                <Button disabled={!apiKey} onClick={getStarted}>
+                    Get started
+                </Button>
+            </ButtonContainer>
         </ViewContainer>
     );
 };

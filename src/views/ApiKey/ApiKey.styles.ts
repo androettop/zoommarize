@@ -6,3 +6,7 @@ export const ViewContainer = styled("div", {
     gridTemplateColumns: "1fr",
     gridGap: "24px",
 });
+
+export const ButtonContainer = styled("div", {
+    justifySelf: "center",
+});

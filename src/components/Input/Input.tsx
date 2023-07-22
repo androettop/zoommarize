@@ -8,7 +8,7 @@ interface InputProps {
 
 const Input = ({ value, onChange, placeholder }: InputProps) => (
     <StyledInput
-        value={value}
+        value={value || ""}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
     />

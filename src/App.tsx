@@ -1,3 +1,4 @@
+import { useStorage } from "./helpers/storage";
 import { globalCss } from "./theme";
 import ApiKey from "./views/ApiKey/ApiKey";
 
@@ -14,9 +15,23 @@ const globalStyles = globalCss({
 
 function App() {
     globalStyles();
+    const { state, setState } = useStorage();
+
     return (
         <div>
-            <ApiKey />
+            {!state.apiKey ? (
+                <ApiKey />
+            ) : (
+                <>
+                    <h1
+                        onClick={() => {
+                            setState({ ...state, apiKey: undefined });
+                        }}
+                    >
+                        OpenAI Playground
+                    </h1>
+                </>
+            )}
         </div>
     );
 }
