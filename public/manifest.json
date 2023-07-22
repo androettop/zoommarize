@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Zoommarizer",
+    "name": "Zoommarize",
     "description": "Summarize your Zoom meetings",
     "version": "0.1",
     "action": {
