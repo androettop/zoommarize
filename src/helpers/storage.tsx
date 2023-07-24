@@ -21,6 +21,8 @@ interface StorageProviderProps {
     children: React.ReactNode;
 }
 
+// TODO: use chrome.storage instead of localStorage
+
 export const StorageProvider: FC<StorageProviderProps> = ({ children }) => {
     const [state, setState] = useState(() => {
         const storedState = localStorage.getItem("state");
