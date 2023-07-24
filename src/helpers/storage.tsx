@@ -21,17 +21,19 @@ interface StorageProviderProps {
     children: React.ReactNode;
 }
 
-// TODO: use chrome.storage instead of localStorage
-
 export const StorageProvider: FC<StorageProviderProps> = ({ children }) => {
-    const [state, setState] = useState(() => {
-        const storedState = localStorage.getItem("state");
-        return storedState ? JSON.parse(storedState) : {};
-    });
+    const [state, _setState] = useState<State>({});
 
     useEffect(() => {
-        localStorage.setItem("state", JSON.stringify(state));
-    }, [state]);
+        chrome.storage.local.get("state").then((result) => {
+            _setState(result);
+        });
+    }, []);
+
+    const setState = (state: State) => {
+        _setState(state);
+        chrome.storage.local.set({ state });
+    };
 
     return (
         <StorageContext.Provider value={{ state, setState }}>

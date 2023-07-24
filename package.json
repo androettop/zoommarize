@@ -21,8 +21,19 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "watch:build": "npm-watch build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "watch": {
+    "build": {
+      "patterns": [
+        "."
+      ],
+      "ignore": "build",
+      "extensions": "*",
+      "quiet": false
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +55,8 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/chrome": "^0.0.241",
+    "npm-watch": "^0.11.0",
     "prettier": "^3.0.0"
   }
 }
