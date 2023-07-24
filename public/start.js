@@ -2,7 +2,7 @@
 
 const getState = () => {
     const stateElem = document.getElementById("zoom-state");
-    const stateb64 = stateElem.innerText;
+    const stateb64 = stateElem?.innerText || "{}";
     return JSON.parse(atob(stateb64));
 };
 
