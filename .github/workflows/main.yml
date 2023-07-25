@@ -9,7 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
+      
+      - name: npm install
+        run: npm ci
+        
       - name: React app build
         run: npm run build
       
@@ -18,6 +21,7 @@ jobs:
         with:
           extensionDir: 'build'
           zipFilePath: 'extension.crx'
+
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
