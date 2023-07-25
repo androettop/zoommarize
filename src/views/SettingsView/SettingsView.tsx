@@ -6,13 +6,16 @@ import Paragraph from "../../components/Paragraph/Paragraph";
 import Title from "../../components/Title/Title";
 import { useStorage } from "../../helpers/storage";
 import { ButtonContainer, SettingsContainer } from "./SettingsView.styles";
+import { useNavigate } from "react-router-dom";
 
 const SettingsView = () => {
     const { state, setState } = useStorage();
+    const navigate = useNavigate();
     const [apiKey, setApiKey] = useState(state.apiKey || "");
 
     const saveApiKey = () => {
         setState({ ...state, apiKey });
+        navigate(-1);
     };
 
     return (
