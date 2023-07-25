@@ -1,3 +1,4 @@
+import { redirect } from "react-router-dom";
 import { globalCss } from "../theme";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -22,5 +23,22 @@ export const globalStyles = globalCss({
                   transform: "translate(-50%, -50%)",
               }
             : {}),
+    },
+    "::-webkit-scrollbar": {
+        width: "8px",
+    },
+    "::-webkit-scrollbar-thumb": {
+        backgroundColor: "$darker",
+        borderRadius: "4px",
+    },
+    "#root": {
+        height: "300px",
+        width: "300px",
+        overflowX: "hidden",
+        overflowY: "auto",
+        padding: "16px",
+    },
+    "*": {
+        boxSizing: "border-box",
     },
 });

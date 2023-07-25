@@ -12,5 +12,5 @@ export interface ZoomMessage {
 export interface ZoomMeeting {
     messages: Record<string, ZoomMessage>;
     meetingTopic: string;
-    meetingId: string;
+    createdAt: string;
 }

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { StorageProvider } from "./helpers/storage";
-import { BrowserRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement,
@@ -11,9 +11,9 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <StorageProvider>
-            <BrowserRouter>
-                 <App />
-            </BrowserRouter>
+            <MemoryRouter>
+                <App />
+            </MemoryRouter>
         </StorageProvider>
     </React.StrictMode>,
 );
