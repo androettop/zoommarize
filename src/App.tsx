@@ -1,3 +1,4 @@
+import Card from "./components/Card/Card";
 import { globalStyles } from "./helpers/globalStyles";
 import { useStorage } from "./helpers/storage";
 import ApiKey from "./views/ApiKey/ApiKey";
@@ -19,6 +20,7 @@ function App() {
                     >
                         OpenAI Playground
                     </h1>
+                    <Card title="aldlsadlsafadmgeqg asdfmsalfmas" date={"2021-10-20"}/>
                 </>
             )}
         </div>
