@@ -1,4 +1,4 @@
-# Zoomarize
+![Zoomarize](src/assets/logo.svg)
 
 ## Available Scripts
 
