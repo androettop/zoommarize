@@ -11,7 +11,7 @@ const Card = ({title, date}: CardProps) => {
         <StyledCard>
             <StyledCardTitle>{title}</StyledCardTitle>
             <StyledCardDate>
-                {`Released at ${date}`}
+                {`Recorded at: ${date}`}
             </StyledCardDate>
         </StyledCard>
     );
