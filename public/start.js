@@ -2,8 +2,12 @@
 
 const getState = () => {
     const stateElem = document.getElementById("zoom-state");
-    const stateb64 = stateElem?.innerText || "{}";
-    return JSON.parse(atob(stateb64));
+    const stateb64 = stateElem?.innerText;
+    if (stateb64) {
+        return JSON.parse(atob(stateb64));
+    }
+
+    return {};
 };
 
 const currentMeetingId = crypto.randomUUID();
@@ -16,18 +20,20 @@ setInterval(async () => {
 
     if (!currentMeeting) return;
 
-    const meetings =
-        (await chrome.storage.local.get("meetings")?.meetings) || {};
+    const extState = (await chrome.storage.local.get("state"))?.state || {};
+    
+    extState.meetings = extState.meetings || {};
 
-    meetings[currentMeeting] = meetings[currentMeeting] || {
+    extState.meetings[currentMeeting] = extState.meetings[currentMeeting] || {
         meetingTopic: state?.meeting?.meetingTopic,
         createdAt: new Date().toISOString(),
         messages: {},
     };
 
-    meetings[currentMeeting].messages = {
-        ...meetings[currentMeeting].messages,
+    extState.meetings[currentMeeting].messages = {
+        ...extState.meetings[currentMeeting].messages,
         ...state?.newLiveTranscription?.newLTMessage,
     };
-    chrome.storage.local.set({ meetings });
+
+    chrome.storage.local.set({ state: extState });
 }, 1000);
