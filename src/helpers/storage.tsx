@@ -26,7 +26,7 @@ export const StorageProvider: FC<StorageProviderProps> = ({ children }) => {
 
     useEffect(() => {
         chrome.storage.local.get("state").then((result) => {
-            _setState(result);
+            _setState(result.state || {});
         });
     }, []);
 
