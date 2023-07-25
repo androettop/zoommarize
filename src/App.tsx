@@ -1,4 +1,5 @@
 import Card from "./components/Card/Card";
+import Title from "./components/Title/Title";
 import { globalStyles } from "./helpers/globalStyles";
 import { useStorage } from "./helpers/storage";
 import ApiKey from "./views/ApiKey/ApiKey";
@@ -20,6 +21,7 @@ function App() {
                     >
                         OpenAI Playground
                     </h1>
+                    <Title align="left">Last meetings</Title>
                     <Card title="aldlsadlsafadmgeqg asdfmsalfmas" date={"2021-10-20"}/>
                 </>
             )}
