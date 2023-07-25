@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Logo from "../../components/Logo/Logo";
-import { ButtonContainer, ViewContainer } from "./ApiKey.styles";
+import { ButtonContainer, ViewContainer } from "./ApiKeyView.styles";
 import Paragraph from "../../components/Paragraph/Paragraph";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useStorage } from "../../helpers/storage";
 
-const ApiKey = () => {
+const ApiKeyView = () => {
     const { state, setState } = useStorage();
     const [apiKey, setApiKey] = useState(state.apiKey || "");
 
@@ -38,4 +38,4 @@ const ApiKey = () => {
     );
 };
 
-export default ApiKey;
+export default ApiKeyView;

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyledInput } from "./Input.styles";
 interface InputProps {
-    value: string;
+    value?: string;
     onChange: (value: string) => void;
     placeholder?: string;
 }

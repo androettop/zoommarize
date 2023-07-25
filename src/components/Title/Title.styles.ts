@@ -5,6 +5,7 @@ export const StyledTitle = styled("h1", {
     fontWeight: "700",
     lineHeight: "19px",
     color: "$light",
+    margin: 0,
     variants: {
         align: {
             center: {

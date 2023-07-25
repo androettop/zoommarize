@@ -2,14 +2,16 @@ import React from "react";
 import { useStorage } from "../../helpers/storage";
 import Title from "../../components/Title/Title";
 import Card from "../../components/Card/Card";
-import { CardsContainer } from "./Meetings.styles";
+import { CardsContainer } from "./MeetingsView.styles";
+import Header from "../../components/Header/Header";
 
-const Meetings = () => {
+const MeetingsView = () => {
     const { state } = useStorage();
     const meetings = state.meetings || {};
 
     return (
-        <div>
+        <>
+            <Header action="settings" />
             <Title align="left">Last meetings</Title>
             <CardsContainer>
                 {Object.keys(meetings).map((key) => (
@@ -19,8 +21,8 @@ const Meetings = () => {
                     />
                 ))}
             </CardsContainer>
-        </div>
+        </>
     );
 };
 
-export default Meetings;
+export default MeetingsView;

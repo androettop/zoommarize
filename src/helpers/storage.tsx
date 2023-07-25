@@ -14,7 +14,7 @@ interface State {
 
 const StorageContext = createContext<{
     state: State;
-    setState: (state: any) => void;
+    setState: (state: State) => void;
 }>({ state: {}, setState: () => {} });
 
 interface StorageProviderProps {
