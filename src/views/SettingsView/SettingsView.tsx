@@ -7,6 +7,7 @@ import Title from "../../components/Title/Title";
 import { useStorage } from "../../helpers/storage";
 import { ButtonContainer, SettingsContainer } from "./SettingsView.styles";
 import { useNavigate } from "react-router-dom";
+import Alert from "../../components/Alert/Alert";
 
 const SettingsView = () => {
     const { state, setState } = useStorage();
@@ -37,6 +38,10 @@ const SettingsView = () => {
                 <ButtonContainer>
                     <Button onClick={saveApiKey}>Save api key</Button>
                 </ButtonContainer>
+                <Alert
+                    text="You need to enter an api key to continue."
+                    visible={false}
+                />
             </SettingsContainer>
         </>
     );

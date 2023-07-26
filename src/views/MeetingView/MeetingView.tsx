@@ -9,14 +9,19 @@ import { summarize } from "../../helpers/summarize";
 import { messagesToTranscript } from "../../helpers/transcript";
 import { getMessagesFromMeeting } from "../../helpers/zoom";
 import { ButtonContainer, MeetingContainer } from "./MeetingView.styles";
+import Alert from "../../components/Alert/Alert";
+import { useState } from "react";
 
 const MeetingView = () => {
     const { state } = useStorage();
     const { meetingId = "" } = useParams();
     const meeting = state.meetings?.[meetingId];
+    const [loading, setLoading] = useState(false);
 
     const downloadSummary = async () => {
         if (!meeting) return;
+
+        setLoading(true);
 
         const messages = getMessagesFromMeeting(meeting);
 
@@ -28,6 +33,8 @@ const MeetingView = () => {
                 .toLocaleLowerCase()
                 .replace(/ /g, "-")}-summary.txt`,
         );
+
+        setLoading(false);
     };
 
     const downloadTranscript = () => {
@@ -51,7 +58,13 @@ const MeetingView = () => {
             <MeetingContainer>
                 <Title align="center">{meeting?.meetingTopic}</Title>
                 <ButtonContainer>
-                    <Button onClick={downloadSummary}>Download summary</Button>
+                    {loading ? (
+                        <Button disabled={true}>Downloading</Button>
+                    ) : (
+                        <Button onClick={downloadSummary}>
+                            Download summary
+                        </Button>
+                    )}
                 </ButtonContainer>
                 <ButtonContainer>
                     <Button color="secondary" onClick={downloadTranscript}>
@@ -67,6 +80,10 @@ const MeetingView = () => {
                         <img src={kofiImg} alt="ko-fi" />
                     </a>
                 </ButtonContainer>
+                <Alert
+                    text="There was an error downloading the file, please try again."
+                    visible={true}
+                />
             </MeetingContainer>
         </>
     );

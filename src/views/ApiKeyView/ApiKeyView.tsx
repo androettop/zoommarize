@@ -5,6 +5,7 @@ import Paragraph from "../../components/Paragraph/Paragraph";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useStorage } from "../../helpers/storage";
+import Alert from "../../components/Alert/Alert";
 
 const ApiKeyView = () => {
     const { state, setState } = useStorage();
@@ -37,6 +38,7 @@ const ApiKeyView = () => {
                     Get started
                 </Button>
             </ButtonContainer>
+            <Alert text="It seems that the api key is not valid, please check that it is correct" visible={true}/>
         </ViewContainer>
     );
 };
