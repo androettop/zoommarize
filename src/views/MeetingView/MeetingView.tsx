@@ -1,13 +1,14 @@
 import { useParams } from "react-router-dom";
+import kofiImg from "../../assets/kofi.png";
 import Button from "../../components/Button/Button";
 import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
-import { useStorage } from "../../helpers/storage";
-import { ButtonContainer, MeetingContainer } from "./MeetingView.styles";
-import kofiImg from "../../assets/kofi.png";
 import { downloadFile } from "../../helpers/download";
+import { useStorage } from "../../helpers/storage";
 import { summarize } from "../../helpers/summarize";
+import { messagesToTranscript } from "../../helpers/transcript";
 import { getMessagesFromMeeting } from "../../helpers/zoom";
+import { ButtonContainer, MeetingContainer } from "./MeetingView.styles";
 
 const MeetingView = () => {
     const { state } = useStorage();
@@ -29,6 +30,21 @@ const MeetingView = () => {
         );
     };
 
+    const downloadTranscript = () => {
+        if (!meeting) return;
+
+        const messages = getMessagesFromMeeting(meeting);
+
+        const transcript = messagesToTranscript(messages);
+
+        downloadFile(
+            transcript,
+            `${meeting.meetingTopic
+                .toLocaleLowerCase()
+                .replace(/ /g, "-")}-transcript.txt`,
+        );
+    };
+
     return (
         <>
             <Header action="back" />
@@ -38,7 +54,9 @@ const MeetingView = () => {
                     <Button onClick={downloadSummary}>Download summary</Button>
                 </ButtonContainer>
                 <ButtonContainer>
-                    <Button color="secondary">Download transcript</Button>
+                    <Button color="secondary" onClick={downloadTranscript}>
+                        Download transcript
+                    </Button>
                 </ButtonContainer>
                 <ButtonContainer>
                     <a
