@@ -4,6 +4,7 @@ import { useStorage } from "./helpers/storage";
 import ApiKeyView from "./views/ApiKeyView/ApiKeyView";
 import MeetingsView from "./views/MeetingsView/MeetingsView";
 import SettingsView from "./views/SettingsView/SettingsView";
+import MeetingView from "./views/MeetingView/MeetingView";
 
 function App() {
     globalStyles();
@@ -17,6 +18,10 @@ function App() {
                 <Routes>
                     <Route path="/" element={<MeetingsView />} />
                     <Route path="/settings" element={<SettingsView />} />
+                    <Route
+                        path="/meeting/:meetingId"
+                        element={<MeetingView />}
+                    />
                 </Routes>
             )}
         </div>

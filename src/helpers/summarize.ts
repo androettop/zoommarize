@@ -3,18 +3,24 @@ import { Message } from "../types/message";
 import { DEFAULT_PROMPT } from "./prompt";
 import { createChunks, messagesToTranscript } from "./transcript";
 
-const MAX_RETRIES = 5;
-
-const configuration = new Configuration({
-    apiKey: localStorage.getItem("OPENAI_API_KEY") || "",
-});
-
-// Workaround for use in browser
-delete configuration.baseOptions.headers["User-Agent"];
-
-const openai = new OpenAIApi(configuration);
+const MAX_RETRIES = 1;
 
 export const summarize = async (messages: Message[]): Promise<string> => {
+    const apiKey = (await chrome.storage.local.get("state")).state?.apiKey;
+
+    if (!apiKey) {
+        throw new Error("API key not found");
+    }
+
+    const configuration = new Configuration({
+        apiKey,
+    });
+
+    // Workaround for use in browser
+    delete configuration.baseOptions.headers["User-Agent"];
+
+    const openai = new OpenAIApi(configuration);
+
     const transcript = messagesToTranscript(messages);
     const chunks = createChunks(transcript);
     const summaryList = [];
@@ -55,6 +61,7 @@ export const summarize = async (messages: Message[]): Promise<string> => {
             } catch (error) {
                 // TODO: handle error properly
                 console.error(error);
+                retries++;
             }
         }
         if (retries === MAX_RETRIES) {

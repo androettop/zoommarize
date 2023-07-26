@@ -26,7 +26,11 @@ const SettingsView = () => {
                 <Input value={apiKey} onChange={(text) => setApiKey(text)} />
                 <Paragraph align="center">
                     You can get your api key from the{" "}
-                    <a href="https://platform.openai.com/account/api-keys">
+                    <a
+                        href="https://platform.openai.com/account/api-keys"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
                         OpenAI web site
                     </a>
                 </Paragraph>

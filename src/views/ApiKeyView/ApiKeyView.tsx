@@ -20,7 +20,10 @@ const ApiKeyView = () => {
             <Paragraph align="center">
                 Before starting configure
                 <br /> your{" "}
-                <a href="https://platform.openai.com/account/api-keys">
+                <a
+                    href="https://platform.openai.com/account/api-keys"
+                    target="_blank" rel="noreferrer"
+                >
                     OpenAI api key
                 </a>
             </Paragraph>

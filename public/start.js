@@ -21,7 +21,7 @@ setInterval(async () => {
     if (!currentMeeting) return;
 
     const extState = (await chrome.storage.local.get("state"))?.state || {};
-    
+
     extState.meetings = extState.meetings || {};
 
     extState.meetings[currentMeeting] = extState.meetings[currentMeeting] || {
@@ -29,6 +29,11 @@ setInterval(async () => {
         createdAt: new Date().toISOString(),
         messages: {},
     };
+
+    if (!extState.meetings[currentMeeting].meetingTopic) {
+        extState.meetings[currentMeeting].meetingTopic =
+            state?.meeting?.meetingTopic;
+    }
 
     extState.meetings[currentMeeting].messages = {
         ...extState.meetings[currentMeeting].messages,
