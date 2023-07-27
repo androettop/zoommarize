@@ -60,7 +60,7 @@ const SettingsView = () => {
                     </Button>
                 </ButtonContainer>
                 <Alert
-                    text="You need to enter an api key to continue."
+                    text="It seems that the api key is not valid, please check that it is correct."
                     visible={alertVisible}
                 />
             </SettingsContainer>
