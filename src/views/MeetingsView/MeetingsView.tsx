@@ -5,16 +5,18 @@ import Card from "../../components/Card/Card";
 import { CardsContainer } from "./MeetingsView.styles";
 import Header from "../../components/Header/Header";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const MeetingsView = () => {
     const { state } = useStorage();
     const navigate = useNavigate();
     const meetings = state.meetings || {};
+    const { t } = useTranslation();
 
     return (
         <>
             <Header action="settings" />
-            <Title align="left">Last meetings</Title>
+            <Title align="left">{t("lastMeetings")}</Title>
             <CardsContainer>
                 {Object.keys(meetings).map((key) => (
                     <Card

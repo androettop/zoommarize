@@ -1,3 +1,5 @@
+import "./i18n/config";
+
 import { Route, Routes } from "react-router-dom";
 import { globalStyles } from "./helpers/globalStyles";
 import { useStorage } from "./helpers/storage";
