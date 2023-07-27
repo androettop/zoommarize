@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import kofiImg from "../../assets/kofi.png";
 import Button from "../../components/Button/Button";
 import Header from "../../components/Header/Header";
@@ -12,13 +12,16 @@ import { ButtonContainer, MeetingContainer } from "./MeetingView.styles";
 import Alert from "../../components/Alert/Alert";
 import { useState } from "react";
 import useAlert from "../../hooks/useAlert";
+import { useTranslation } from "react-i18next";
 
 const MeetingView = () => {
-    const { state } = useStorage();
+    const { state, setState } = useStorage();
     const { meetingId = "" } = useParams();
     const meeting = state.meetings?.[meetingId];
     const [alertVisible, setAlertVisible] = useAlert(false);
     const [loading, setLoading] = useState(false);
+    const { t } = useTranslation();
+    const navigate = useNavigate();
 
     const downloadSummary = async () => {
         if (!meeting) return;
@@ -34,7 +37,7 @@ const MeetingView = () => {
                 summary,
                 `${meeting.meetingTopic
                     .toLocaleLowerCase()
-                    .replace(/ /g, "-")}-summary.txt`,
+                    .replace(/ /g, "-")}-${t("summary")}.txt`
             );
         } catch (e) {
             setAlertVisible(true);
@@ -51,10 +54,19 @@ const MeetingView = () => {
 
         downloadFile(
             transcript,
-            `${meeting.meetingTopic
-                .toLocaleLowerCase()
-                .replace(/ /g, "-")}-transcript.txt`,
+            `${meeting.meetingTopic.toLocaleLowerCase().replace(/ /g, "-")}-${t(
+                "summary"
+            )}.txt`
         );
+    };
+
+    const deleteMeeting = () => {
+        if (!meeting) return;
+        const meetings = { ...state.meetings };
+        delete meetings[meetingId];
+
+        setState({ ...state, meetings });
+        navigate(-1);
     };
 
     return (
@@ -63,17 +75,20 @@ const MeetingView = () => {
             <MeetingContainer>
                 <Title align="center">{meeting?.meetingTopic}</Title>
                 <ButtonContainer>
-                    {loading ? (
-                        <Button disabled={true}>Downloading</Button>
-                    ) : (
-                        <Button onClick={downloadSummary}>
-                            Download summary
-                        </Button>
-                    )}
+                    <Button disabled={loading} onClick={downloadSummary}>
+                        {loading
+                            ? t("summarizing") + "..."
+                            : t("downloadSummary")}
+                    </Button>
                 </ButtonContainer>
                 <ButtonContainer>
                     <Button color="secondary" onClick={downloadTranscript}>
-                        Download transcript
+                        {t("downloadTranscript")}
+                    </Button>
+                </ButtonContainer>
+                <ButtonContainer>
+                    <Button color="danger" onClick={deleteMeeting}>
+                        {t("deleteMeeting")}
                     </Button>
                 </ButtonContainer>
                 <ButtonContainer>
@@ -85,8 +100,9 @@ const MeetingView = () => {
                         <img src={kofiImg} alt="ko-fi" />
                     </a>
                 </ButtonContainer>
+
                 <Alert
-                    text="There was an error downloading the file, please try again."
+                    text={t("errorDownloadingMessage")}
                     visible={alertVisible}
                 />
             </MeetingContainer>

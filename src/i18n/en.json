@@ -1,3 +1,19 @@
 {
-    "lastMeetings": "Last meetings"
+    "lastMeetings": "Last meetings",
+    "beforeStartingConfigureYour": "Before starting configure\nyour ",
+    "openAIApiKey": "OpenAI API key",
+    "verifying": "Verifying",
+    "getStarted": "Get started",
+    "apiKeyInvalidMessage": "It seems that the api key is not valid, please check that it is correct",
+    "summary": "summary",
+    "transcript": "transcript",
+    "summarizing": "Summarizing",
+    "downloadSummary": "Download summary",
+    "downloadTranscript": "Download transcript",
+    "errorDownloadingMessage": "There was an error downloading the file, please try again.",
+    "youCanGetYourApiKeyFromThe": "You can get your api key from the ",
+    "openAIWebSite": "OpenAI website",
+    "saveApiKey": "Save api key",
+    "recordedAt": "Recorded at",
+    "deleteMeeting": "Delete meeting",
 }

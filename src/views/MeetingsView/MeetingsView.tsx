@@ -24,7 +24,9 @@ const MeetingsView = () => {
                             navigate(`/meeting/${key}`);
                         }}
                         title={meetings[key].meetingTopic}
-                        date={meetings[key].createdAt}
+                        date={new Date(
+                            meetings[key].createdAt
+                        ).toLocaleString()}
                     />
                 ))}
             </CardsContainer>

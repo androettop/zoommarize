@@ -6,14 +6,14 @@ interface ButtonProps {
     children: React.ReactNode;
     onClick?: () => void;
     disabled?: boolean;
-    color?: "primary" | "secondary";
+    color?: "primary" | "secondary" | "danger";
 }
 
 const Button = ({
     children,
     onClick = () => {},
     disabled,
-    color = "primary",
+    color = "primary"
 }: ButtonProps) => (
     <StyledButton onClick={onClick} disabled={disabled} color={color}>
         {children}

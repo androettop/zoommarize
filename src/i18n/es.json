@@ -1,3 +1,19 @@
 {
-    "lastMeetings": "Ultimas reuniones"
+    "lastMeetings": "Ultimas reuniones",
+    "beforeStartingConfigureYour": "Antes de comenzar configura\ntu ",
+    "openAIApiKey": "API key de OpenAI",
+    "verifying": "Verificando",
+    "getStarted": "Comenzar",
+    "apiKeyInvalidMessage": "Parece que la api key no es válida, por favor compruebe que es correcta",
+    "summary": "resumen",
+    "transcript": "transcripción",
+    "summarizing": "Resumiendo",
+    "downloadSummary": "Descargar resumen",
+    "downloadTranscript": "Descargar transcripción",
+    "errorDownloadingMessage": "Se ha producido un error al descargar el archivo, inténtelo de nuevo",
+    "youCanGetYourApiKeyFromThe": "Puede obtener su clave api en la ",
+    "openAIWebSite": "pagina web de OpenAI",
+    "saveApiKey": "Guardar api key",
+    "recordedAt": "Grabada el",
+    "deleteMeeting": "Eliminar reunión"
 }

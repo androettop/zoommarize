@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Button from "../../components/Button/Button";
 import Header from "../../components/Header/Header";
 import Input from "../../components/Input/Input";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import Alert from "../../components/Alert/Alert";
 import useAlert from "../../hooks/useAlert";
 import { isValidOpenAIApiKey } from "../../helpers/openai";
+import { useTranslation } from "react-i18next";
 
 const SettingsView = () => {
     const { state, setState } = useStorage();
@@ -17,6 +18,7 @@ const SettingsView = () => {
     const [apiKey, setApiKey] = useState(state.apiKey || "");
     const [alertVisible, setAlertVisible] = useAlert(false);
     const [loading, setLoading] = useState(false);
+    const { t } = useTranslation();
 
     const saveApiKey = () => {
         setLoading(true);
@@ -37,30 +39,30 @@ const SettingsView = () => {
         <>
             <Header action="back" />
             <SettingsContainer>
-                <Title align="center">OpenAI api key</Title>
+                <Title align="center">{t("openAIApiKey")}</Title>
                 <Input
                     value={apiKey}
                     onChange={(text) => setApiKey(text)}
-                    placeholder="OpenAI api key"
+                    placeholder={t("openAIApiKey")}
                     type="password"
                 />
                 <Paragraph align="center">
-                    You can get your api key from the{" "}
+                    {t("youCanGetYourApiKeyFromThe")}
                     <a
                         href="https://platform.openai.com/account/api-keys"
                         target="_blank"
                         rel="noreferrer"
                     >
-                        OpenAI web site
+                        {t("openAIWebSite")}
                     </a>
                 </Paragraph>
                 <ButtonContainer>
                     <Button disabled={!apiKey || loading} onClick={saveApiKey}>
-                        {loading ? "Verifying..." : "Save api key"}
+                        {loading ? t("verifying") + "..." : t("saveApiKey")}
                     </Button>
                 </ButtonContainer>
                 <Alert
-                    text="It seems that the api key is not valid, please check that it is correct."
+                    text={t("apiKeyInvalidMessage")}
                     visible={alertVisible}
                 />
             </SettingsContainer>

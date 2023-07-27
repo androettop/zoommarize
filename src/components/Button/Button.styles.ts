@@ -14,17 +14,20 @@ export const StyledButton = styled("button", {
     variants: {
         color: {
             primary: {
-                backgroundColor: "$blue",
+                backgroundColor: "$blue"
             },
             secondary: {
-                backgroundColor: "$darker",
+                backgroundColor: "$darker"
             },
+            danger: {
+                backgroundColor: "$red"
+            }
         },
         disabled: {
             true: {
                 opacity: "0.6",
-                cursor: "not-allowed",
-            },
-        },
-    },
+                cursor: "not-allowed"
+            }
+        }
+    }
 });
