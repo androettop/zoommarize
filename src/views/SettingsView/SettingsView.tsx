@@ -8,15 +8,29 @@ import { useStorage } from "../../helpers/storage";
 import { ButtonContainer, SettingsContainer } from "./SettingsView.styles";
 import { useNavigate } from "react-router-dom";
 import Alert from "../../components/Alert/Alert";
+import useAlert from "../../hooks/useAlert";
+import { isValidOpenAIApiKey } from "../../helpers/openai";
 
 const SettingsView = () => {
     const { state, setState } = useStorage();
     const navigate = useNavigate();
     const [apiKey, setApiKey] = useState(state.apiKey || "");
+    const [alertVisible, setAlertVisible] = useAlert(false);
+    const [loading, setLoading] = useState(false);
 
     const saveApiKey = () => {
-        setState({ ...state, apiKey });
-        navigate(-1);
+        setLoading(true);
+
+        isValidOpenAIApiKey(apiKey)
+            .then((isValid) => {
+                if (isValid) {
+                    setState({ ...state, apiKey });
+                    navigate(-1);
+                } else {
+                    setAlertVisible(true);
+                }
+            })
+            .finally(() => setLoading(false));
     };
 
     return (
@@ -24,7 +38,12 @@ const SettingsView = () => {
             <Header action="back" />
             <SettingsContainer>
                 <Title align="center">OpenAI api key</Title>
-                <Input value={apiKey} onChange={(text) => setApiKey(text)} />
+                <Input
+                    value={apiKey}
+                    onChange={(text) => setApiKey(text)}
+                    placeholder="OpenAI api key"
+                    type="password"
+                />
                 <Paragraph align="center">
                     You can get your api key from the{" "}
                     <a
@@ -36,11 +55,13 @@ const SettingsView = () => {
                     </a>
                 </Paragraph>
                 <ButtonContainer>
-                    <Button onClick={saveApiKey}>Save api key</Button>
+                    <Button disabled={!apiKey || loading} onClick={saveApiKey}>
+                        {loading ? "Verifying..." : "Save api key"}
+                    </Button>
                 </ButtonContainer>
                 <Alert
                     text="You need to enter an api key to continue."
-                    visible={false}
+                    visible={alertVisible}
                 />
             </SettingsContainer>
         </>

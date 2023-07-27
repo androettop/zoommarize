@@ -13,15 +13,20 @@ const ApiKeyView = () => {
     const { state, setState } = useStorage();
     const [apiKey, setApiKey] = useState(state.apiKey || "");
     const [alertVisible, setAlertVisible] = useAlert(false);
+    const [loading, setLoading] = useState(false);
 
     const getStarted = () => {
-        isValidOpenAIApiKey(apiKey).then((isValid) => {
-            if (isValid) {
-                setState({ ...state, apiKey })
-            } else {
-                setAlertVisible(true);
-            }
-        });
+        setLoading(true);
+
+        isValidOpenAIApiKey(apiKey)
+            .then((isValid) => {
+                if (isValid) {
+                    setState({ ...state, apiKey });
+                } else {
+                    setAlertVisible(true);
+                }
+            })
+            .finally(() => setLoading(false));
     };
 
     return (
@@ -41,11 +46,12 @@ const ApiKeyView = () => {
             <Input
                 value={apiKey}
                 onChange={(text) => setApiKey(text)}
-                placeholder="Api key"
+                placeholder="OpenAI api key"
+                type="password"
             />
             <ButtonContainer>
-                <Button disabled={!apiKey} onClick={getStarted}>
-                    Get started
+                <Button disabled={!apiKey || loading} onClick={getStarted}>
+                    {loading ? "Verifying..." : "Get started"}
                 </Button>
             </ButtonContainer>
             <Alert
