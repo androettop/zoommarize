@@ -11,29 +11,34 @@ import { getMessagesFromMeeting } from "../../helpers/zoom";
 import { ButtonContainer, MeetingContainer } from "./MeetingView.styles";
 import Alert from "../../components/Alert/Alert";
 import { useState } from "react";
+import useAlert from "../../hooks/useAlert";
 
 const MeetingView = () => {
     const { state } = useStorage();
     const { meetingId = "" } = useParams();
     const meeting = state.meetings?.[meetingId];
+    const [alertVisible, setAlertVisible] = useAlert(false);
     const [loading, setLoading] = useState(false);
 
     const downloadSummary = async () => {
         if (!meeting) return;
 
-        setLoading(true);
+        try {
+            setLoading(true);
 
-        const messages = getMessagesFromMeeting(meeting);
+            const messages = getMessagesFromMeeting(meeting);
 
-        const summary = await summarize(messages);
+            const summary = await summarize(messages);
 
-        downloadFile(
-            summary,
-            `${meeting.meetingTopic
-                .toLocaleLowerCase()
-                .replace(/ /g, "-")}-summary.txt`,
-        );
-
+            downloadFile(
+                summary,
+                `${meeting.meetingTopic
+                    .toLocaleLowerCase()
+                    .replace(/ /g, "-")}-summary.txt`,
+            );
+        } catch (e) {
+            setAlertVisible(true);
+        }
         setLoading(false);
     };
 
@@ -82,7 +87,7 @@ const MeetingView = () => {
                 </ButtonContainer>
                 <Alert
                     text="There was an error downloading the file, please try again."
-                    visible={true}
+                    visible={alertVisible}
                 />
             </MeetingContainer>
         </>
