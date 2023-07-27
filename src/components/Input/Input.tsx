@@ -12,6 +12,7 @@ const Input = ({ value, onChange, placeholder, type = "text" }: InputProps) => (
         value={value || ""}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
+        type={type}
     />
 );
 

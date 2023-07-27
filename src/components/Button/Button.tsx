@@ -12,10 +12,10 @@ interface ButtonProps {
 const Button = ({
     children,
     onClick = () => {},
-    disabled,
+    disabled = false,
     color = "primary"
 }: ButtonProps) => (
-    <StyledButton onClick={onClick} disabled={disabled} color={color}>
+    <StyledButton onClick={disabled ? undefined : onClick} disabled={disabled} color={color}>
         {children}
     </StyledButton>
 );
