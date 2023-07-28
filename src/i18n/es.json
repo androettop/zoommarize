@@ -15,5 +15,7 @@
     "openAIWebSite": "pagina web de OpenAI",
     "saveApiKey": "Guardar api key",
     "recordedAt": "Grabada el",
-    "deleteMeeting": "Eliminar reunión"
+    "deleteMeeting": "Eliminar reunión",
+    "noMeetings": "Todavía no hay reuniones, entra en una reunión de zoom y activa los subtítulos para empezar a grabar"
+
 }
