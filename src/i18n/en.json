@@ -15,5 +15,6 @@
     "openAIWebSite": "OpenAI website",
     "saveApiKey": "Save api key",
     "recordedAt": "Recorded at",
-    "deleteMeeting": "Delete meeting"
+    "deleteMeeting": "Delete meeting",
+    "noMeetings": "No meetings yet, enter a zoom meeting and activate subtitles to start recording"
 }

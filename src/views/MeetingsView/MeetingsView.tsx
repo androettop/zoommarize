@@ -6,6 +6,7 @@ import { CardsContainer } from "./MeetingsView.styles";
 import Header from "../../components/Header/Header";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Paragraph from "../../components/Paragraph/Paragraph";
 
 const MeetingsView = () => {
     const { state } = useStorage();
@@ -18,6 +19,9 @@ const MeetingsView = () => {
             <Header action="settings" />
             <Title align="left">{t("lastMeetings")}</Title>
             <CardsContainer>
+                {Object.keys(meetings).length === 0 && (
+                    <Paragraph align="center">{t("noMeetings")}</Paragraph>
+                )}
                 {Object.keys(meetings).map((key) => (
                     <Card
                         onClick={() => {
