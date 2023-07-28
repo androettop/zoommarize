@@ -4,13 +4,13 @@
 
 In the project directory, you can run:
 
+### `npm run build`
+
+Builds the extension in the `build` folder.
+
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Builds the extension in the `build` folder and watches for changes.
 
 ## Installation
 
@@ -35,7 +35,6 @@ The extension should be installed now.
 ## Usage
 
 **Setup**
-
 
 First, you have to setup an OpenAI api key. You can get one [here](https://platform.openai.com/account/api-keys).
 
