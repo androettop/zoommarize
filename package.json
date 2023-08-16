@@ -1,6 +1,6 @@
 {
   "name": "zoommarize",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@stitches/react": "^1.2.8",
@@ -23,7 +23,8 @@
   },
   "scripts": {
     "start": "npm-watch build",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "package": "npm-build-zip"
   },
   "watch": {
     "build": {
@@ -56,6 +57,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/chrome": "^0.0.241",
+    "npm-build-zip": "^1.0.4",
     "npm-watch": "^0.11.0",
     "prettier": "^3.0.0"
   }

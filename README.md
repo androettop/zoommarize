@@ -14,6 +14,12 @@ Builds the extension in the `build` folder and watches for changes.
 
 ## Installation
 
+### Chrome web store
+
+The extension is available on the chrome web store [here](https://chrome.google.com/webstore/detail/zoommarize/jlceonglmckccfddknocmfpjkbegjfdi/).
+
+### Manual installation
+
 Right now the project is pending for the google web store review. You can install it manually by following the steps below:
 
 1. Download the latest release from [here](https://github.com/androettop/zoommarize/releases)
